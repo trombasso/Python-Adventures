@@ -1,10 +1,13 @@
-lst = [1, 2, 3, 4, 5, 6]
+from random import uniform
 
-for i in range(1, 6):
-    lst[i] = lst[i - 1]
 
-print(lst)
+def estimate_PI(hits):
+    totalhits = 0
+    for i in range(0, hits):
+        if uniform(-1.00, 1.00) ** 2 + uniform(-1.00, 1.00) ** 2 - 1 ** 2 < 0:
+            totalhits += 1
+    print(f"PI estimates to {(4 * totalhits) / hits } based on {totalhits} points of calculation.")
 
-lst2 = [2 * x for x in range(20)]
-print(lst2)
-print(lst2 * 2)
+
+if __name__ == "__main__":
+    estimate_PI(int(input("How many reference points? ")))
