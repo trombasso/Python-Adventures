@@ -64,29 +64,32 @@ def main():
                 else:
                     response = get_data(authorization_token)
                 can_get_info = True
-            except Exception:
+
+                # data collection
+                name_livingroom = response.json()["body"]["devices"][0]["module_name"]
+                temp_livingroom = response.json()["body"]["devices"][0]["dashboard_data"]["Temperature"]
+                co2_livingroom = response.json()["body"]["devices"][0]["dashboard_data"]["CO2"]
+                humidity_livingroom = response.json()["body"]["devices"][0]["dashboard_data"]["Humidity"]
+                noise_livingroom = response.json()["body"]["devices"][0]["dashboard_data"]["Noise"]
+                pressure = response.json()["body"]["devices"][0]["dashboard_data"]["Pressure"]
+
+                name_bedroom = response.json()["body"]["devices"][0]["modules"][1]["module_name"]
+                temp_bedroom = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["Temperature"]
+                humidity_bedroom = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["Humidity"]
+                temptrend_bedroom = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["temp_trend"]
+
+                name_outside = response.json()["body"]["devices"][0]["modules"][0]["module_name"]
+                temp_outside = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["Temperature"]
+                humidity_outside = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["Humidity"]
+                temptrend_outside = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["temp_trend"]
+
+            except Exception as e:
                 clear()
                 print("No connection!")
                 print("Retrying...")
+                print("------------------------------")
+                print(f"Errormessage:\n {e}")
                 time.sleep(int(config["TIMERS"]["noconnection"]))
-
-        # data collection
-        name_livingroom = response.json()["body"]["devices"][0]["module_name"]
-        temp_livingroom = response.json()["body"]["devices"][0]["dashboard_data"]["Temperature"]
-        co2_livingroom = response.json()["body"]["devices"][0]["dashboard_data"]["CO2"]
-        humidity_livingroom = response.json()["body"]["devices"][0]["dashboard_data"]["Humidity"]
-        noise_livingroom = response.json()["body"]["devices"][0]["dashboard_data"]["Noise"]
-        pressure = response.json()["body"]["devices"][0]["dashboard_data"]["Pressure"]
-
-        name_bedroom = response.json()["body"]["devices"][0]["modules"][1]["module_name"]
-        temp_bedroom = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["Temperature"]
-        humidity_bedroom = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["Humidity"]
-        temptrend_bedroom = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["temp_trend"]
-
-        name_outside = response.json()["body"]["devices"][0]["modules"][0]["module_name"]
-        temp_outside = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["Temperature"]
-        humidity_outside = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["Humidity"]
-        temptrend_outside = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["temp_trend"]
 
         clear()
         print("               V Æ R E T   N Å")
