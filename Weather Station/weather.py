@@ -5,7 +5,13 @@ import configparser
 
 
 class Netatmo:
-    def __init__(self, netatmo_output={}):
+    def __init__(self, current_time=time.time(), expires_in=0, netatmo_output={}):
+
+        self.current_time = current_time
+        self.expires_in = expires_in
+        self.__netatmo_output = netatmo_output
+        self.counter = 0
+        self.autorization_data = {}
 
         SETTING_FILE_PATH = os.path.join(os.path.dirname(__file__), "settings.ini")
         self.config = configparser.ConfigParser()
@@ -15,65 +21,65 @@ class Netatmo:
         self.CLIENT_SECRET = self.config["CODES"]["client_secret"]
         self.REDIRECT_URI = "https://google.com"
 
-        current_time = time.time()
-        expires_in = 0
-        self.__netatmo_output = netatmo_output
+        self.checktime_for_exchange_code = time.time() + self.expires_in
+        self.checktime_for_timer = time.time()
 
-        loop = True
-        while loop:
-            checktime = current_time + expires_in
+        self.update_data()
 
-            can_get_info = False
-            while can_get_info is not True:
-                try:
-                    if checktime < time.time():
-                        autorization_data = self.exchange_code()
-                        expires_in = autorization_data["expires_in"]
-                        authorization_token = autorization_data["access_token"]
-                        response = self.get_data(authorization_token)
+    """ Må fortsatt implementere en slags "wait" dersom programmet havner i en exception
+        Oppdatert tidspunkt må også hentes fra denne klassen i et nøkkelord.
 
-                        # data collection
-                        self.__netatmo_output["name_livingroom"] = response.json()["body"]["devices"][0]["module_name"]
-                        self.__netatmo_output["temp_livingroom"] = response.json()["body"]["devices"][0]["dashboard_data"]["Temperature"]
-                        self.__netatmo_output["co2_livingroom"] = response.json()["body"]["devices"][0]["dashboard_data"]["CO2"]
-                        self.__netatmo_output["humidity_livingroom"] = response.json()["body"]["devices"][0]["dashboard_data"]["Humidity"]
-                        self.__netatmo_output["noise_livingroom"] = response.json()["body"]["devices"][0]["dashboard_data"]["Noise"]
-                        self.__netatmo_output["pressure"] = response.json()["body"]["devices"][0]["dashboard_data"]["Pressure"]
+    """
 
-                        self.__netatmo_output["name_bedroom"] = response.json()["body"]["devices"][0]["modules"][1]["module_name"]
-                        self.__netatmo_output["temp_bedroom"] = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"][
-                            "Temperature"
-                        ]
-                        self.__netatmo_output["humidity_bedroom"] = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"][
-                            "Humidity"
-                        ]
-                        self.__netatmo_output["temptrend_bedroom"] = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"][
-                            "temp_trend"
-                        ]
+    def update_data(self):
+        try:
+            if self.checktime_for_exchange_code < time.time():
+                self.autorization_data = self.exchange_code()
+                self.checktime_for_exchange_code = time.time() + self.expires_in
 
-                        self.__netatmo_output["name_outside"] = response.json()["body"]["devices"][0]["modules"][0]["module_name"]
-                        self.__netatmo_output["temp_outside"] = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"][
-                            "Temperature"
-                        ]
-                        self.__netatmo_output["humidity_outside"] = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"][
-                            "Humidity"
-                        ]
-                        self.__netatmo_output["temptrend_outside"] = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"][
-                            "temp_trend"
-                        ]
+            if self.checktime_for_timer < time.time():
+                self.expires_in = self.autorization_data["expires_in"]
+                authorization_token = self.autorization_data["access_token"]
+                response = self.get_data(authorization_token)
 
-                        self.__netatmo_output["online"] = True
+                # data collection
+                self.__netatmo_output["name_livingroom"] = response.json()["body"]["devices"][0]["module_name"]
+                self.__netatmo_output["temp_livingroom"] = response.json()["body"]["devices"][0]["dashboard_data"]["Temperature"]
+                self.__netatmo_output["co2_livingroom"] = response.json()["body"]["devices"][0]["dashboard_data"]["CO2"]
+                self.__netatmo_output["humidity_livingroom"] = response.json()["body"]["devices"][0]["dashboard_data"]["Humidity"]
+                self.__netatmo_output["noise_livingroom"] = response.json()["body"]["devices"][0]["dashboard_data"]["Noise"]
+                self.__netatmo_output["pressure"] = response.json()["body"]["devices"][0]["dashboard_data"]["Pressure"]
 
-                    else:
-                        response = self.get_data(authorization_token)
-                    can_get_info = True
+                self.__netatmo_output["name_bedroom"] = response.json()["body"]["devices"][0]["modules"][1]["module_name"]
+                self.__netatmo_output["temp_bedroom"] = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["Temperature"]
+                self.__netatmo_output["humidity_bedroom"] = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["Humidity"]
+                self.__netatmo_output["temptrend_bedroom"] = response.json()["body"]["devices"][0]["modules"][1]["dashboard_data"]["temp_trend"]
 
-                except Exception:
-                    self.__netatmo_output["online"] = False
-                    # time.sleep(int(self.config["TIMERS"]["noconnection"]))
+                self.__netatmo_output["name_outside"] = response.json()["body"]["devices"][0]["modules"][0]["module_name"]
+                self.__netatmo_output["temp_outside"] = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["Temperature"]
+                self.__netatmo_output["humidity_outside"] = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["Humidity"]
+                self.__netatmo_output["temptrend_outside"] = response.json()["body"]["devices"][0]["modules"][0]["dashboard_data"]["temp_trend"]
+                self.__netatmo_output["online"] = True
+                self.__netatmo_output["counter"] = self.counter
+
+                self.counter += 1
+
+                self.checktime_for_timer = time.time() + int(self.config["TIMERS"]["refresh"])
+
+            # else:
+            #     response = self.get_data(authorization_token)
+        except Exception as e:
+            # print(e)
+            self.__netatmo_output["online"] = False
+            # time.sleep(int(self.config["TIMERS"]["noconnection"]))
+
+    def __call__(self):
+        self.update_data()
+        return self.__netatmo_output
 
     @property
     def netatmo_output(self):
+        # self.update_data()
         return self.__netatmo_output
 
     def exchange_code(self):
@@ -100,7 +106,10 @@ class Netatmo:
 
 def main():
     netatmo = Netatmo()
-    print(netatmo)
+
+    while True:
+        print(netatmo()["counter"])
+        time.sleep(10)
 
 
 if __name__ == "__main__":
