@@ -4,6 +4,8 @@ import os
 import time
 from datetime import datetime
 import configparser
+from rich import print
+from rich.panel import Panel
 
 
 def clear():
@@ -92,24 +94,24 @@ def main():
                 time.sleep(int(config["TIMERS"]["noconnection"]))
 
         clear()
-        print("               V Æ R E T   N Å")
-        print("------------------------------")
-        print("U T E\n")
+        Panel.fit("[bold yellow]Hi, I'm a Panel", border_style="red")
+        print("[u]                     V Æ R E T[/u]")
+        print("UTE\n")
         print("Lufttrykk:", pressure, "mbar")
         print("Temperatur:", temp_outside, "°c")
         print("Luftfuktighet:", humidity_outside, "%")
         print("Temperaturtrend:", temptrend_outside)
-        print("------------------------------")
-        print("S T U A\n")
+        print("[u]                              [/u]")
+        print("STUA\n")
         print("Temp:", temp_livingroom, "°c")
         print("CO2:", co2_livingroom, "ppm")
         print("Luftfuktighet:", humidity_livingroom, "%")
         print("Bråk:", noise_livingroom, "db")
-        print("------------------------------")
-        print("S O V E R O M M E T\n")
+        print("[u]                              [/u]")
+        print("SOVEROMMET\n")
         print("Temp:", temp_bedroom, "°c")
         print("Luftfuktighet:", humidity_bedroom, "%")
-        print("------------------------------")
+        print("[u]                              [/u]")
         current_datetime = datetime.now()
         date_str = current_datetime.strftime("%d/%m/%Y            %H:%M:%S")
         print(date_str)
