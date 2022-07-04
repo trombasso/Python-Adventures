@@ -1,0 +1,54 @@
+[Mon Mar 21 16:55:18.441146 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49752] mod_wsgi (pid=123075, process='karkapp', application='%(GLOBAL)'): Failed to parse Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 16:55:18.441444 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49752] mod_wsgi (pid=123075): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 16:55:18.446393 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49752]   File "/var/www/kark/kark.kstudios.no.wsgi", line 2
+[Mon Mar 21 16:55:18.446419 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49752]     Import logging
+[Mon Mar 21 16:55:18.446433 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49752]            ^
+[Mon Mar 21 16:55:18.446441 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49752] SyntaxError: invalid syntax
+[Mon Mar 21 17:13:13.104655 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49915] mod_wsgi (pid=123075): Failed to exec Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:13:13.105035 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49915] mod_wsgi (pid=123075): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:13:13.105945 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49915] Traceback (most recent call last):
+[Mon Mar 21 17:13:13.106318 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49915]   File "/var/www/kark/kark.kstudios.no.wsgi", line 2, in <module>
+[Mon Mar 21 17:13:13.106343 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49915]     Sys.path.insert(0, '/var/www/kark')
+[Mon Mar 21 17:13:13.106400 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49915] NameError: name 'Sys' is not defined
+[Mon Mar 21 17:13:14.620118 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49916] mod_wsgi (pid=123075): Failed to exec Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:13:14.620209 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49916] mod_wsgi (pid=123075): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:13:14.620396 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49916] Traceback (most recent call last):
+[Mon Mar 21 17:13:14.620513 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49916]   File "/var/www/kark/kark.kstudios.no.wsgi", line 2, in <module>
+[Mon Mar 21 17:13:14.620534 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49916]     Sys.path.insert(0, '/var/www/kark')
+[Mon Mar 21 17:13:14.620575 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49916] NameError: name 'Sys' is not defined
+[Mon Mar 21 17:13:15.899950 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49917] mod_wsgi (pid=123075): Failed to exec Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:13:15.900053 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49917] mod_wsgi (pid=123075): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:13:15.900263 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49917] Traceback (most recent call last):
+[Mon Mar 21 17:13:15.900337 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49917]   File "/var/www/kark/kark.kstudios.no.wsgi", line 2, in <module>
+[Mon Mar 21 17:13:15.900353 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49917]     Sys.path.insert(0, '/var/www/kark')
+[Mon Mar 21 17:13:15.900399 2022] [wsgi:error] [pid 123075] [remote 192.168.1.254:49917] NameError: name 'Sys' is not defined
+[Mon Mar 21 17:16:48.297278 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49940] mod_wsgi (pid=167494): Failed to exec Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:16:48.297312 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49940] mod_wsgi (pid=167494): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:16:48.301325 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49940] Traceback (most recent call last):
+[Mon Mar 21 17:16:48.301363 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49940]   File "/var/www/kark/kark.kstudios.no.wsgi", line 2, in <module>
+[Mon Mar 21 17:16:48.301368 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49940]     Sys.path.insert(0, '/var/www/kark')
+[Mon Mar 21 17:16:48.301381 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49940] NameError: name 'Sys' is not defined
+[Mon Mar 21 17:16:51.975857 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49941] mod_wsgi (pid=167494): Failed to exec Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:16:51.975993 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49941] mod_wsgi (pid=167494): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:16:51.976247 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49941] Traceback (most recent call last):
+[Mon Mar 21 17:16:51.976348 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49941]   File "/var/www/kark/kark.kstudios.no.wsgi", line 2, in <module>
+[Mon Mar 21 17:16:51.976365 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49941]     Sys.path.insert(0, '/var/www/kark')
+[Mon Mar 21 17:16:51.976428 2022] [wsgi:error] [pid 167494] [remote 192.168.1.254:49941] NameError: name 'Sys' is not defined
+[Mon Mar 21 17:18:22.569253 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49947] mod_wsgi (pid=167779): Failed to exec Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:18:22.569286 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49947] mod_wsgi (pid=167779): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:18:22.573571 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49947] Traceback (most recent call last):
+[Mon Mar 21 17:18:22.573599 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49947]   File "/var/www/kark/kark.kstudios.no.wsgi", line 5, in <module>
+[Mon Mar 21 17:18:22.573603 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49947]     with open(activate_this) as file_:
+[Mon Mar 21 17:18:22.573617 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49947] PermissionError: [Errno 13] Permission denied: '/root/.local/share/virtualenvs/kark-KhOYM2k-/bin/activate_this.py'
+[Mon Mar 21 17:18:24.422841 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49948] mod_wsgi (pid=167779): Failed to exec Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:18:24.422986 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49948] mod_wsgi (pid=167779): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:18:24.423235 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49948] Traceback (most recent call last):
+[Mon Mar 21 17:18:24.423349 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49948]   File "/var/www/kark/kark.kstudios.no.wsgi", line 5, in <module>
+[Mon Mar 21 17:18:24.423370 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49948]     with open(activate_this) as file_:
+[Mon Mar 21 17:18:24.423421 2022] [wsgi:error] [pid 167779] [remote 192.168.1.254:49948] PermissionError: [Errno 13] Permission denied: '/root/.local/share/virtualenvs/kark-KhOYM2k-/bin/activate_this.py'
+[Mon Mar 21 17:25:16.595808 2022] [wsgi:error] [pid 168200] [remote 192.168.1.254:49977] mod_wsgi (pid=168200): Failed to exec Python script file '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:25:16.595841 2022] [wsgi:error] [pid 168200] [remote 192.168.1.254:49977] mod_wsgi (pid=168200): Exception occurred processing WSGI script '/var/www/kark/kark.kstudios.no.wsgi'.
+[Mon Mar 21 17:25:16.600148 2022] [wsgi:error] [pid 168200] [remote 192.168.1.254:49977] Traceback (most recent call last):
+[Mon Mar 21 17:25:16.600174 2022] [wsgi:error] [pid 168200] [remote 192.168.1.254:49977]   File "/var/www/kark/kark.kstudios.no.wsgi", line 5, in <module>
+[Mon Mar 21 17:25:16.600179 2022] [wsgi:error] [pid 168200] [remote 192.168.1.254:49977]     with open(activate_this) as file_:
+[Mon Mar 21 17:25:16.600201 2022] [wsgi:error] [pid 168200] [remote 192.168.1.254:49977] PermissionError: [Errno 13] Permission denied: '/home/trombasso/.local/share/virtualenvs/kark-KhOYM2k-/bin/activate_this.py'

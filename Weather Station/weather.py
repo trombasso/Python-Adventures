@@ -2,6 +2,8 @@ import requests
 import os
 import time
 import configparser
+import json
+from datetime import datetime
 
 
 class Netatmo:
@@ -104,13 +106,44 @@ class Netatmo:
         return requests.get(url, data, headers=hed)
 
 
-def main():
-    netatmo = Netatmo()
+class Met_data:
+    def __init__(self, alt, lat, long):
+        self.alt = alt
+        self.lat = lat
+        self.long = long
+        self.counter = 0
 
-    while True:
-        print(netatmo()["counter"])
-        time.sleep(10)
+        self.response = self.get_met_data()
+        self.met_data = json.loads(self.response.text)
+        self.expires = self.response.headers["Expires"]
+        self.expires_print = self.get_time_from_expires()
+
+    def __call__(self):
+        if self.check_expired():
+            self.counter += 1
+            self.response = self.get_met_data()
+            self.met_data = json.loads(self.response.text)
+            self.expires = self.response.headers["Expires"]
+            self.expires_print = self.get_time_from_expires()
+
+    # return True if currenttime > expired
+    def check_expired(self):
+        return datetime.utcnow() > datetime.strptime(self.expires, "%a, %d %b %Y %H:%M:%S %Z")
+
+    def get_time_from_expires(self):
+        lst = self.expires.split()
+        return lst[4]
+
+    def get_met_data(self):
+        hed = {"user-agent": "anders@karlskaas.no"}
+        data = {"": ""}
+        url = "https://api.met.no/weatherapi/locationforecast/2.0/compact?altitude=" + str(self.alt) + "&lat=" + str(self.lat) + "&lon=" + str(self.long)
+        return requests.get(url, data, headers=hed)
+
+
+def testfunc(data):
+    data()
 
 
 if __name__ == "__main__":
-    main()
+    pass

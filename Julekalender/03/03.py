@@ -34,4 +34,6 @@ epsilon_rate_binary = epsilon_rate_binary.join(value_epsilon)
 epsilon_rate = int(epsilon_rate_binary, 2)
 
 power = gamma_rate * epsilon_rate
+print(gamma_rate_binary, epsilon_rate_binary)
+print(gamma_rate, epsilon_rate)
 print(power)
